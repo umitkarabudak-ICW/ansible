@@ -1,0 +1,3 @@
+- name: Install Kubernetes
+  hosts: 192.168.0.190
+  become: true
