@@ -47,3 +47,10 @@
     - name: Load System
       shell: |
         sysctl --system
+
+    - name: Disable Swap
+      shell: |
+        swapoff -a 
+        sed -i '/ swap / s/^/#/' /etc/fstab
+        mount -a
+        free -h
