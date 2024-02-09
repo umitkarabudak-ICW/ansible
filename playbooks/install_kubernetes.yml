@@ -23,7 +23,14 @@
 
     - name: Set Containerd Module Load Conf
       copy:
-        dest: /etc/sysctl.d/99-kubernetes-cri.conf
+        dest: /etc/modules-load.d/containerd.conf
+        content: | 
+          overlay
+          br_netfilter
+
+    - name: Set K8S Module Load Conf
+      copy:
+        dest: /etc/modules-load.d/k8s.conf
         content: | 
           overlay
           br_netfilter
@@ -36,3 +43,7 @@
       modprobe:
         name: br_netfilter
         state: present
+
+    - name: Load System
+      shell: |
+        sysctl --system
