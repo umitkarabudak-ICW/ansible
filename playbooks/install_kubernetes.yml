@@ -2,6 +2,13 @@
   hosts: all
   become: true
   tasks:
-    - name: test
-      debug:
-        msg: "RSM"
+    - name: Add Kubernetes Repo
+      copy:
+        dest: /etc/yum.repos.d/kubernetes.repo
+        content: | 
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
