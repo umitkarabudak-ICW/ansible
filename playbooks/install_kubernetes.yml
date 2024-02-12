@@ -2,6 +2,12 @@
   hosts: all
   become: true
   tasks:
+    - name: Stop Firewalld
+      systemd:
+        name: firewalld
+        state: stopped
+        enabled: no
+
     - name: Add Kubernetes Repo
       copy:
         dest: /etc/yum.repos.d/kubernetes.repo
@@ -48,9 +54,56 @@
       shell: |
         sysctl --system
 
+        
     - name: Disable Swap
       shell: |
         swapoff -a 
         sed -i '/ swap / s/^/#/' /etc/fstab
         mount -a
         free -h
+
+    - name: Add Docker CE Repo
+      dnf:
+        name: "https://download.docker.com/linux/centos/docker-ce.repo"
+        state: present
+        
+    - name: Install DNF Modules
+      dnf:
+        name:
+          - yum-utils
+          - device-mapper-persistent-data
+          - lvm2
+          - iproute-tc
+        state: latest
+
+    - name: Remove Old Modules
+      yum:
+        name: "{{ packages }}"
+        state: abstent
+      vars:
+        - buildah
+        - skopeo
+        - podman
+        - containers-common
+        - atomic-registries
+        - docker
+        - container-tools
+
+    - name: Remove Old Files
+      file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - /etc/containers/*
+        - /var/lib/containers/*
+        - /etc/docker
+        - /etc/subuid*
+        - /etc/subgid*
+        - ~/.local/share/containers/
+        
+    - name: Install Necessary Modules
+      yum:
+        name: "{{ packages }}"
+        state: present
+      vars:
+        - go-toolset
