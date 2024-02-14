@@ -107,3 +107,25 @@
         state: present
       vars:
         - go-toolset
+
+    - name: Install Containetd
+      dnf:
+        name:
+          - containerd.io
+        state: latest
+        
+    - name: Create Containerd Container DIR
+      file:
+        path: /rsm-kubernetes
+        state: directory
+        
+    - name: Copy Containerd Conf
+      file:
+        path: /rsm-kubernetes
+        state: directory
+
+    - name: Enable Containerd and Restart
+      systemd:
+        state: restarted
+        daemon_reload: true
+        name: containerd
