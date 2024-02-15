@@ -77,7 +77,7 @@
 
     - name: Remove Old Modules
       yum_repository:
-        name: "{{ packages }}"
+        name: "{{ item }}"
         state: absent
       notify: yum-clean-metadata
       loop:
@@ -103,7 +103,7 @@
         
     - name: Install Necessary Modules
       yum:
-        name: "{{ packages }}"
+        name: "{{ item }}"
         state: present
       loop:
         - go-toolset
