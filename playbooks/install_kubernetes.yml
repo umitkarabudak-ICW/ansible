@@ -127,4 +127,4 @@
         packages:
         - kubelet
         - kubeadm
-        - kubeinit
+        - kubectl
