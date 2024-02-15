@@ -80,7 +80,7 @@
       yum:
         name: "{{ packages }}"
         state: abstent
-      vars:
+      loop:
         - buildah
         - skopeo
         - podman
