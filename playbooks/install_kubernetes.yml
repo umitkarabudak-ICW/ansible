@@ -63,9 +63,8 @@
         free -h
 
     - name: Add Docker CE Repo
-      dnf:
-        name: "https://download.docker.com/linux/centos/docker-ce.repo"
-        state: present
+      shell: |
+        dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
         
     - name: Install DNF Modules
       dnf:
