@@ -76,9 +76,10 @@
         state: latest
 
     - name: Remove Old Modules
-      yum:
+      yum_repository:
         name: "{{ packages }}"
-        state: abstent
+        state: absent
+      notify: yum-clean-metadata
       loop:
         - buildah
         - skopeo
