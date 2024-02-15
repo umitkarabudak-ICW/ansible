@@ -76,18 +76,8 @@
         state: latest
 
     - name: Remove Old Modules
-      yum_repository:
-        name: "{{ item }}"
-        state: absent
-      notify: yum-clean-metadata
-      loop:
-        - buildah
-        - skopeo
-        - podman
-        - containers-common
-        - atomic-registries
-        - docker
-        - container-tools
+      shell: |
+        yum remove -y buildah skopeo podman containers-common atomic-registries docker container-tools
 
     - name: Remove Old Files
       file:
