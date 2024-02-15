@@ -114,9 +114,17 @@
         url: https://raw.githubusercontent.com/umitkarabudak-ICW/ansible/main/playbooks/conf/containerd/config.toml
         dest: /etc/containerd/conf.toml
         
-
     - name: Enable Containerd and Restart
       systemd:
         state: restarted
         daemon_reload: true
         name: containerd
+        
+    - name: Install Kubernetes
+      ansible.builtin.yum:
+        name: "{{ packages }}"
+      vars:
+        packages:
+        - kubelet
+        - kubeadm
+        - kubeinit
