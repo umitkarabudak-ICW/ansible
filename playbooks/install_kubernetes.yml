@@ -128,3 +128,9 @@
         - kubelet-1.29.0
         - kubeadm-1.29.0
         - kubectl-1.29.0
+
+    - name: Enable Kubelet and Restart
+      systemd:
+        state: restarted
+        daemon_reload: true
+        name: kubelet
