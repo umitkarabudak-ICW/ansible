@@ -120,9 +120,10 @@
         state: directory
         
     - name: Copy Containerd Conf
-      file:
-        path: /rsm-kubernetes
-        state: directory
+      get_url:
+        url: https://raw.githubusercontent.com/umitkarabudak-ICW/ansible/main/playbooks/conf/containerd/config.toml
+        dest: /etc/containerd/conf.toml
+        
 
     - name: Enable Containerd and Restart
       systemd:
