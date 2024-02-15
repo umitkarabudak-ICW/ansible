@@ -112,7 +112,7 @@
     - name: Copy Containerd Conf
       get_url:
         url: https://raw.githubusercontent.com/umitkarabudak-ICW/ansible/main/playbooks/conf/containerd/config.toml
-        dest: /etc/containerd/conf.toml
+        dest: /etc/containerd/config.toml
         
     - name: Enable Containerd and Restart
       systemd:
