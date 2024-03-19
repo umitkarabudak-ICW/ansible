@@ -1,5 +1,5 @@
 - name: Install Kubernetes Keepalived and HAProxy
-  hosts: localhost
+  hosts: all
   become: true
   gather_facts: false
   
