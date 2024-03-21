@@ -86,6 +86,7 @@
             server rsm-esy-kmaster 10.86.39.165:6443 check fall 3 rise 2
             server rsm-ank-kmaster 10.86.39.166:6443 check fall 3 rise 2
         EOF
+        setsebool -P haproxy_connect_any=1
         
     - name: Enable HAProxy
       systemd:
