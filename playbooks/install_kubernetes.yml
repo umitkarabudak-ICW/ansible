@@ -111,6 +111,7 @@
         state: restarted
         daemon_reload: true
         name: containerd
+        enabled: true
         
     - name: Install Kubernetes
       ansible.builtin.yum:
@@ -126,3 +127,4 @@
         state: restarted
         daemon_reload: true
         name: kubelet
+        enabled: true
