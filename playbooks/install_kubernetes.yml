@@ -40,3 +40,8 @@
         content: | 
           overlay
           br_netfilter
+
+    - name: Add the overlay module
+      modprobe:
+        name: overlay
+        state: present
