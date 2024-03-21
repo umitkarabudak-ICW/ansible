@@ -7,3 +7,36 @@
         name: firewalld
         state: stopped
         enabled: no
+        
+    - name: Add Kubernetes Repo
+      copy:
+        dest: /etc/yum.repos.d/kubernetes.repo
+        content: | 
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
+
+    - name: Set Kubernetes CRI Conf
+      copy:
+        dest: /etc/sysctl.d/99-kubernetes-cri.conf
+        content: | 
+          net.bridge.bridge-nf-call-iptables  = 1
+          net.ipv4.ip_forward                 = 1
+          net.bridge.bridge-nf-call-ip6tables = 1
+
+    - name: Set Containerd Module Load Conf
+      copy:
+        dest: /etc/modules-load.d/containerd.conf
+        content: | 
+          overlay
+          br_netfilter
+
+    - name: Set K8S Module Load Conf
+      copy:
+        dest: /etc/modules-load.d/k8s.conf
+        content: | 
+          overlay
+          br_netfilter
