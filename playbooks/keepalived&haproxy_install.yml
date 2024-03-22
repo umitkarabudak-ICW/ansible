@@ -66,6 +66,11 @@
       systemd:
         name: keepalived
         enabled: true
+
+    - name: Enable HAProxy
+      systemd:
+        name: haproxy
+        enabled: true 
         
     - name: Configure HAProxy
       shell: |       
@@ -88,11 +93,7 @@
         EOF
         setsebool -P haproxy_connect_any=1
         
-    - name: Enable HAProxy
-      systemd:
-        name: haproxy
-        enabled: true    
-
+   
     - name: Restart services
       systemd:
         name: "{{ item }}"
