@@ -3,8 +3,8 @@ imports = []
 oom_score = 0
 plugin_dir = ""
 required_plugins = []
-root = "/rsm-kubernetes/var/lib/containerd"
-state = "/rsm-kubernetes/run/containerd"
+root = "/Products/rsm-kubernetes/var/lib/containerd"
+state = "/Products/rsm-kubernetes/run/containerd"
 temp = ""
 version = 2
 
@@ -19,7 +19,7 @@ version = 2
   uid = 0
 
 [grpc]
-  address = "/rsm-kubernetes/run/containerd/containerd.sock"
+  address = "/Products/rsm-kubernetes/run/containerd/containerd.sock"
   gid = 0
   max_recv_message_size = 16777216
   max_send_message_size = 16777216
